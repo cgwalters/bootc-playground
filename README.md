@@ -27,6 +27,8 @@ Alternatively, we could `rpm-ostree install bootc` and run `bootc install{-to-fi
 However, https://github.com/containers/bootc/pull/137 needs to be addressed before we're able to do that though.  Hence, the suggested rebase when starting with a vanilla CoreOS image.
 The instructions will be updated here once things run smoothly.
 
+Note that `bootc-install-alongside` already works on non os-tree hosts.
+
 ## Bootable Disk Images
 
 It would be great to directly create a VM with a "bootable" disk image instead of doing the dance of first installing Fedora CoreOS and immediately rebasing or overriding it afterwards.
