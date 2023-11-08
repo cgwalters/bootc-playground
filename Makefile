@@ -37,7 +37,7 @@ DISK_GB ?= 10
 IMAGE ?= ${IMAGES_DIR}/$(shell ls -1c ${IMAGES_DIR}|head -n1)
 
 ifneq ($(VM_MOUNT),)
-VM_MOUNT_ARGS=--filesystem=${VM_MOUNT},vm-mount,driver.type=virtiofs --memorybacking=source.type=memfd,access.mode=shared
+VM_MOUNT_ARGS=--filesystem=$(realpath ${VM_MOUNT}),vm-mount,driver.type=virtiofs --memorybacking=source.type=memfd,access.mode=shared
 endif
 
 # Source: https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/#_booting_on_a_local_hypervisor_libvirt_example
