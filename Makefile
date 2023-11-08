@@ -1,6 +1,7 @@
 STREAM ?= stable
 IMAGES_DIR:=./images
 
+
 # Download the latest stable Fedora CoreOS image.
 #
 # Source: https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/
@@ -12,6 +13,7 @@ download:
 		--format qcow2.xz \
 		--decompress \
 		--directory=${IMAGES_DIR}
+
 
 # virt-install requires most paths to be absolute, so try defaulting to
 # absolute as much as possible.
@@ -29,6 +31,7 @@ ignition:
 	podman run --interactive --rm quay.io/coreos/butane:release \
 		--pretty --strict < ${BUTANE_CONFIG} > ${IGNITION_CONFIG}
 	chcon --verbose --type svirt_home_t ${IGNITION_CONFIG}
+
 
 VM_NAME ?= bootc-playground
 VCPUS ?= 2
@@ -61,6 +64,7 @@ vm-install:
 		${VM_MOUNT_ARGS} \
 		--qemu-commandline="-fw_cfg name=opt/com.coreos/config,file=${IGNITION_CONFIG}"
 
+
 # Some convenience targets to manage the VM.
 #
 # Source: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/virtualization_deployment_and_administration_guide/part-administration
@@ -71,9 +75,11 @@ vm-start:
 
 	sudo virsh start ${VM_NAME}
 
-.PHONE: vm-ip
+
+.PHONY: vm-ip
 vm-ip:
 	sudo virsh net-dhcp-leases default
+
 
 .PHONY: vm-stop
 vm-stop:
@@ -81,6 +87,7 @@ vm-stop:
 	@echo ""
 
 	sudo virsh shutdown --domain ${VM_NAME}
+
 
 .PHONY: vm-remove
 vm-remove:
