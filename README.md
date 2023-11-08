@@ -8,10 +8,10 @@ Eventually, the playground here may aid in developing on bootc as well.
 ## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
 
 * `make download` to download a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) image.
-* `make vm-install` to install a VM with `virt-install`
-* `make vm-{start,stop}` to start and stop the local VM
-* `make vm-remove` to remove the local VM
-* `make vm-ip` to inspect the IP address of the VM (e.g., to `ssh core@IP` into it)
+* `make vm-install` to install a VM with `virt-install`.  You may use the `IMAGE=/path/to/custom.qcow2` env variable to boot another local image.
+* `make vm-{start,stop}` to start and stop the local VM.
+* `make vm-remove` to remove the local VM.
+* `make vm-ip` to inspect the IP address of the VM (e.g., to `ssh core@IP` into it).
 
 The default user is `core` with the password `core`.  Once you have the VM installed and running, you are ready to play with bootc.
 
