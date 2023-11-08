@@ -42,7 +42,7 @@ vm-install:
 	@echo "Installing a new VM (${VM_NAME}) with image ${IMAGE}."
 	@echo ""
 
-	virt-install \
+	sudo virt-install \
 		--connect="qemu:///system" \
 		--name="${VM_NAME}" \
 		--vcpus="${VCPUS}" \
@@ -61,6 +61,7 @@ vm-install:
 vm-start:
 	@echo "Starting VM ${VM_NAME}.  Run 'make vm-ip' in case you forgot the IP."
 	@echo ""
+
 	sudo virsh start ${VM_NAME}
 
 .PHONE: vm-ip
@@ -71,10 +72,12 @@ vm-ip:
 vm-stop:
 	@echo "Shutting down VM ${VM_NAME}."
 	@echo ""
+
 	sudo virsh shutdown --domain ${VM_NAME}
 
 .PHONY: vm-remove
 vm-remove:
 	@echo "Removing VM ${VM_NAME} and all its storage.  You may neeed to run 'make vm-stop' before."
 	@echo ""
+
 	sudo virsh undefine ${VM_NAME} --remove-all-storage

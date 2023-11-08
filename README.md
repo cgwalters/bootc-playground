@@ -1,7 +1,7 @@
-# Playground for [bootc](https://github.com/containers/bootc)
+# Playground for [bootc](https://containers.github.io/bootc/)
 
-This repository aims at facilitating getting used to [bootc](https://github.com/containers/bootc) and may serve as template for future documentation or tutorials.
-[bootc](https://github.com/containers/bootc) is built upon and uses many technologies that we try to hide as much as possible such that you can focus on bootc and do not need to fight your way through setting up a VM.
+This repository aims at facilitating getting used to [bootc](https://containers.github.io/bootc/) and may serve as template for future documentation or tutorials.
+[bootc](https://containers.github.io/bootc/) is built upon and uses many technologies that we try to hide as much as possible such that you can focus on bootc and do not need to fight your way through setting up a VM.
 
 ## Install a Fedora CoreOS VM
 
