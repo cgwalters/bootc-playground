@@ -3,6 +3,8 @@
 This repository aims at facilitating playing with [bootc](https://containers.github.io/bootc/).
 [bootc](https://containers.github.io/bootc/) is built upon and uses many technologies that we try to hide as much as possible such that you can focus on bootc and do not need to fight your way through the Fedora CoreOS or ignition documentation.
 
+Eventually, the playground here may aid in developing on bootc as well.
+
 ## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
 
 * `make download` to download a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) image.
