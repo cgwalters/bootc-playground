@@ -20,7 +20,7 @@ You can then git-commit the changes.
 
 ### Rebase Fedora CoreOS Image
 
-Once your VM has booted, you may rebase your image as described in the [CentOS boot documentation](https://github.com/CentOS/centos-boot/blob/main/install.md#rebasing-from-fedora-coreos).
+Once your VM has booted, you may rebase your image as described in the [CentOS boot documentation](https://github.com/CentOS/centos-boot/blob/main/docs/install.md).
 That will rebase your VM into a bootable image with [bootc](https://containers.github.io/bootc/) installed.
 
 Alternatively, we could `rpm-ostree install bootc` and run `bootc install{-to-filesystem}` (see [bootc-install docs](https://containers.github.io/bootc/install/#executing-bootc-install)).
