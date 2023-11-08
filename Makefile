@@ -84,7 +84,8 @@ vm-stop:
 
 .PHONY: vm-remove
 vm-remove:
-	@echo "Removing VM ${VM_NAME} and all its storage.  You may neeed to run 'make vm-stop' before."
+	@echo "Removing VM ${VM_NAME} and all its storage."
 	@echo ""
 
+	sudo virsh --quiet shutdown --domain ${VM_NAME} || true
 	sudo virsh undefine ${VM_NAME} --remove-all-storage
