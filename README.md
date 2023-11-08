@@ -1,9 +1,8 @@
 # Playground for [bootc](https://containers.github.io/bootc/)
 
 This repository aims at facilitating playing with [bootc](https://containers.github.io/bootc/).
-[bootc](https://containers.github.io/bootc/) is built upon and uses many technologies that we try to hide as much as possible such that you can focus on bootc and do not need to fight your way through the Fedora CoreOS or ignition documentation.
+[bootc](https://containers.github.io/bootc/) intersects with many technologies that we try to hide as much as possible such that you can focus on bootc and do not need to fight your way through the Fedora CoreOS or ignition documentation.
 
-Eventually, the playground here may aid in developing on bootc as well.
 
 ## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
 
@@ -17,6 +16,7 @@ The default user is `core` with the password `core`.  Once you have the VM insta
 
 If you desire changing the ignition config (i.e., `ignition.ign`), please update the [Butane config](https://coreos.github.io/butane/specs/) (i.e., `butane.bu`) first and then run `make ignition`.
 You can then git-commit the changes.
+
 
 ### Mount Host Directories
 
@@ -39,6 +39,10 @@ $ cat /var/playground/1
 1
 ```
 
+If you want to try out a development version of bootc or test a pull request, you may point `VM_HOST` to your local [bootc](https://github.com/containers/bootc) Git tree.
+The local Git tree can then be mounted into the VM and the host's `bootc` can be executed directly.
+
+
 ## Rebase Fedora CoreOS Image
 
 Once your VM has booted, you may rebase your image as described in the [CentOS boot documentation](https://github.com/CentOS/centos-boot/blob/main/docs/install.md).
@@ -49,6 +53,7 @@ However, https://github.com/containers/bootc/pull/137 needs to be addressed befo
 The instructions will be updated here once things run smoothly.
 
 Note that `bootc-install-alongside` already works on non os-tree hosts.
+
 
 ## Bootable Disk Images
 
