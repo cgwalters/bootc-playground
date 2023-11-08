@@ -12,3 +12,12 @@ This repository aims at facilitating getting used to [bootc](https://containers.
 * `make vm-ip` to inspect the IP address of the VM (e.g., to `ssh core@IP` into it)
 
 The default user is `core` with the password `core`.  Once you have the VM installed and running, you are ready to play with bootc.
+
+### Rebase Fedora CoreOS Image
+
+Once your VM has booted, you may rebase your image as described in the [CentOS boot documentation](https://github.com/CentOS/centos-boot/blob/main/install.md#rebasing-from-fedora-coreos).
+That will rebase your VM into a bootable image with [bootc](https://containers.github.io/bootc/) installed.
+
+Alternatively, we could `rpm-ostree install bootc` and run `bootc install{-to-filesystem}` (see [bootc-install docs](https://containers.github.io/bootc/install/#executing-bootc-install)).
+However, https://github.com/containers/bootc/pull/137 needs to be addressed before we're able to do that though.  Hence, the suggested rebase when starting with a vanilla CoreOS image.
+The instructions will be updated here once things run smoothly.
