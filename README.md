@@ -20,18 +20,19 @@ You can then git-commit the changes.
 
 ### Mount Host Directories
 
-If you want to mount a host directory into the VM, set the `VM_MOUNT` environment variable and run `make install`.
+If you want to mount a host directory into the VM, set the `VM_MOUNT` environment variable and run `make vm-install`.
 The variable will instruct `virt-install` to setup a [virtiofs mount](https://libvirt.org/kbase/virtiofs.html) with the `vm_mount` tag.
 You can then mount the host directory as follows:
 
+**On the host:**
 ```
-# On the host
 $ mkdir /tmp/playground-files
 $ echo 1 > /tmp/playground-files/1
 $ VM_MOUNT=/tmp/playground-files make install
-[...]
+```
 
-# Inside the VM
+**Inside the VM:**
+```
 $ sudo mkdir /var/playground
 $ sudo mount -t virtiofs vm-mount /var/playground
 $ cat /var/playground/1
