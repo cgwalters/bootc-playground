@@ -3,7 +3,7 @@
 This repository aims at facilitating getting used to [bootc](https://containers.github.io/bootc/) and may serve as template for future documentation or tutorials.
 [bootc](https://containers.github.io/bootc/) is built upon and uses many technologies that we try to hide as much as possible such that you can focus on bootc and do not need to fight your way through setting up a VM.
 
-## Install a Fedora CoreOS VM
+## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
 
 * `make download` to download a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) image.
 * `make vm-install` to install a VM with `virt-install`
