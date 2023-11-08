@@ -1,0 +1,32 @@
+# Butane specification: https://coreos.github.io/butane/specs/
+
+variant: fcos
+version: 1.5.0
+
+# The default user and password is both "core".  If you desire to change that,
+# please refer to the docs below.
+#
+# Source: https://docs.fedoraproject.org/en-US/fedora-coreos/authentication/#_using_password_authentication
+passwd:
+  users:
+    - name: core
+      password_hash: $y$j9T$XFzNHq/o3rASNXWDq4HRy/$7Qvm1c.EaK2l2I7lZoN2TgEafzmD5/8D8VpSQ7h/LV1
+      groups:
+        - wheel
+        - sudo
+
+# By default, Fedora CoreOS does not allow password authentication via SSH.
+# But it's much more convenient for testing and playing with the tools, so
+# enable it.
+#
+# Source: https://docs.fedoraproject.org/en-US/fedora-coreos/authentication/#_enabling_ssh_password_authentication
+storage:
+  files:
+    - path: /etc/ssh/sshd_config.d/20-enable-passwords.conf
+      mode: 0644
+      contents:
+        inline: |
+          # Fedora CoreOS disables SSH password login by default.
+          # Enable it.
+          # This file must sort before 40-disable-passwords.conf.
+          PasswordAuthentication yes
