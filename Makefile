@@ -36,10 +36,16 @@ RAM_MB ?= 4096
 DISK_GB ?= 10
 IMAGE ?= ${IMAGES_DIR}/$(shell ls -1c ${IMAGES_DIR}|head -n1)
 
+ifneq ($(VM_MOUNT),)
+VM_MOUNT_ARGS=--filesystem=${VM_MOUNT},vm-mount,driver.type=virtiofs --memorybacking=source.type=memfd,access.mode=shared
+endif
+
 # Source: https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/#_booting_on_a_local_hypervisor_libvirt_example
 .PHONY: vm-install
 vm-install:
 	@echo "Installing a new VM (${VM_NAME}) with image ${IMAGE}."
+	@echo "Set the VM_MOUNT environment variable to mount a host directory into the VM."
+	@echo "You may mount the host directory via 'sudo mount -t virtiofs vm-mount \$mountpoint'."
 	@echo ""
 
 	sudo virt-install \
@@ -52,6 +58,7 @@ vm-install:
 		--graphics=none \
 		--disk="size=${DISK_GB},backing_store=$(realpath ${IMAGE})" \
 		--network bridge=virbr0 \
+		${VM_MOUNT_ARGS} \
 		--qemu-commandline="-fw_cfg name=opt/com.coreos/config,file=${IGNITION_CONFIG}"
 
 # Some convenience targets to manage the VM.

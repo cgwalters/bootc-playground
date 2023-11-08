@@ -18,7 +18,27 @@ The default user is `core` with the password `core`.  Once you have the VM insta
 If you desire changing the ignition config (i.e., `ignition.ign`), please update the [Butane config](https://coreos.github.io/butane/specs/) (i.e., `butane.bu`) first and then run `make ignition`.
 You can then git-commit the changes.
 
-### Rebase Fedora CoreOS Image
+### Mount Host Directories
+
+If you want to mount a host directory into the VM, set the `VM_MOUNT` environment variable and run `make install`.
+The variable will instruct `virt-install` to setup a [virtiofs mount](https://libvirt.org/kbase/virtiofs.html) with the `vm_mount` tag.
+You can then mount the host directory as follows:
+
+```
+# On the host
+$ mkdir /tmp/playground-files
+$ echo 1 > /tmp/playground-files/1
+$ VM_MOUNT=/tmp/playground-files make install
+[...]
+
+# Inside the VM
+$ sudo mkdir /var/playground
+$ sudo mount -t virtiofs vm-mount /var/playground
+$ cat /var/playground/1
+1
+```
+
+## Rebase Fedora CoreOS Image
 
 Once your VM has booted, you may rebase your image as described in the [CentOS boot documentation](https://github.com/CentOS/centos-boot/blob/main/docs/install.md).
 That will rebase your VM into a bootable image with [bootc](https://containers.github.io/bootc/) installed.
