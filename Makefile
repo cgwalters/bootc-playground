@@ -40,7 +40,7 @@ DISK_GB ?= 10
 IMAGE ?= ${IMAGES_DIR}/$(shell ls -1c ${IMAGES_DIR}|head -n1)
 
 ifneq ($(VM_MOUNT),)
-VM_MOUNT_ARGS=--filesystem=$(realpath ${VM_MOUNT}),vm-mount,driver.type=virtiofs --memorybacking=source.type=memfd,access.mode=shared
+VM_MOUNT_ARGS=--filesystem=$(realpath ${VM_MOUNT}),playground-mount,driver.type=virtiofs --memorybacking=source.type=memfd,access.mode=shared
 endif
 
 # Source: https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/#_booting_on_a_local_hypervisor_libvirt_example
@@ -86,13 +86,12 @@ vm-stop:
 	@echo "Shutting down VM ${VM_NAME}."
 	@echo ""
 
-	sudo virsh shutdown --domain ${VM_NAME}
+	sudo virsh shutdown --domain ${VM_NAME} || true
 
 
 .PHONY: vm-remove
 vm-remove:
-	@echo "Removing VM ${VM_NAME} and all its storage."
+	@echo "Removing VM ${VM_NAME} and all its storage.  Make sure to 'make vm-stop' before."
 	@echo ""
 
-	sudo virsh --quiet shutdown --domain ${VM_NAME} || true
 	sudo virsh undefine ${VM_NAME} --remove-all-storage

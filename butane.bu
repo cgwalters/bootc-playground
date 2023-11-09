@@ -30,3 +30,18 @@ storage:
           # Enable it.
           # This file must sort before 40-disable-passwords.conf.
           PasswordAuthentication yes
+
+systemd:
+  units:
+    - name: playground-mount.service
+      enabled: true
+      contents: |
+        [Unit]
+        Description=Mount the VM_MOUNT directory into the VM.
+        [Service]
+        Type=oneshot
+        RemainAfterExit=yes
+        ExecStartPre=/usr/bin/mkdir -p /var/playground
+        ExecStart=sh -c "/usr/bin/mount -t virtiofs playground-mount /var/playground || true"
+        [Install]
+        WantedBy=multi-user.target

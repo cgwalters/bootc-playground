@@ -25,5 +25,14 @@
         "mode": 420
       }
     ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "contents": "[Unit]\nDescription=Mount the VM_MOUNT directory into the VM.\n[Service]\nType=oneshot\nRemainAfterExit=yes\nExecStartPre=/usr/bin/mkdir -p /var/playground\nExecStart=sh -c \"/usr/bin/mount -t virtiofs playground-mount /var/playground || true\"\n[Install]\nWantedBy=multi-user.target\n",
+        "enabled": true,
+        "name": "playground-mount.service"
+      }
+    ]
   }
 }

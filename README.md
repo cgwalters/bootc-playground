@@ -21,25 +21,11 @@ You can then git-commit the changes.
 ### Mount Host Directories
 
 If you want to mount a host directory into the VM, set the `VM_MOUNT` environment variable and run `make vm-install`.
-The variable will instruct `virt-install` to setup a [virtiofs mount](https://libvirt.org/kbase/virtiofs.html) with the `vm_mount` tag.
-You can then mount the host directory as follows:
+The variable will instruct `virt-install` to setup a [virtiofs mount](https://libvirt.org/kbase/virtiofs.html) with the `playground-mount` tag.
+The specified `VM_MOUNT` is automatically mounted at `/var/playground`.
+You may mount it to a custom path via `$ sudo mount -t virtiofs playground-mount /custom/path`.
 
-**On the host:**
-```
-$ mkdir /tmp/playground-files
-$ echo 1 > /tmp/playground-files/1
-$ VM_MOUNT=/tmp/playground-files make install
-```
-
-**Inside the VM:**
-```
-$ sudo mkdir /var/playground
-$ sudo mount -t virtiofs vm-mount /var/playground
-$ cat /var/playground/1
-1
-```
-
-If you want to try out a development version of bootc or test a pull request, you may point `VM_HOST` to your local [bootc](https://github.com/containers/bootc) Git tree.
+If you want to try out a development version of bootc or test a pull request, you may point `VM_MOUNT` to your local [bootc](https://github.com/containers/bootc) Git tree.
 The local Git tree can then be mounted into the VM and the host's `bootc` can be executed directly.
 
 
