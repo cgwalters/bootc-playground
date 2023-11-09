@@ -31,6 +31,9 @@ ignition:
 	podman run --interactive --rm quay.io/coreos/butane:release \
 		--pretty --strict < ${BUTANE_CONFIG} > ${IGNITION_CONFIG}
 
+# When running inside a VM, the virbr0 and default libvirt network may already
+# be occupied.  So make it easy to create another network to create the
+# virbrplayground bridge.
 .PHONY: network-setup
 network-setup:
 	sudo virsh net-create --file=network.xml
