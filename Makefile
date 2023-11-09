@@ -30,12 +30,10 @@ BUTANE_CONFIG ?= $(realpath butane.bu)
 ignition:
 	podman run --interactive --rm quay.io/coreos/butane:release \
 		--pretty --strict < ${BUTANE_CONFIG} > ${IGNITION_CONFIG}
-	chcon --verbose --type svirt_home_t ${IGNITION_CONFIG}
 
 .PHONY: network-setup
 network-setup:
 	sudo virsh net-create --file=network.xml
-	sudo virsh net-start playground
 
 # Those knobs are currently undocumented but can played with if needed.
 VM_NAME ?= bootc-playground
@@ -57,6 +55,7 @@ vm-install:
 	@echo "The VM_MOUNT gets automatically mounted to /var/playground."
 	@echo ""
 
+	chcon --verbose --type svirt_home_t ${IGNITION_CONFIG}
 	sudo virt-install \
 		--connect="qemu:///system" \
 		--name="${VM_NAME}" \
