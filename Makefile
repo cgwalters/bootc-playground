@@ -56,6 +56,7 @@ vm-install:
 	@echo "Installing a new VM (${VM_NAME}) with image ${IMAGE}."
 	@echo "Set the VM_MOUNT environment variable to mount a host directory into the VM."
 	@echo "The VM_MOUNT gets automatically mounted to /var/playground."
+	@echo "If the network step failed, run 'make network-setup' and set 'VM_NETWORK=virbrplayground`."
 	@echo ""
 
 	chcon --verbose --type svirt_home_t ${IGNITION_CONFIG}
