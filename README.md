@@ -3,6 +3,8 @@
 This repository aims at facilitating playing with [bootc](https://containers.github.io/bootc/).
 [bootc](https://containers.github.io/bootc/) intersects with many technologies that we try to hide as much as possible such that you can focus on bootc and do not need to fight your way through the Fedora CoreOS or ignition documentation.
 
+If you find issues, please let me know or open a PR.  I am used to managing containers not VMs :^)
+
 ## Prerequisites
 
 The workflow is based on a Makefile and works on Linux only.
