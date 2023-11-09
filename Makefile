@@ -32,9 +32,14 @@ ignition:
 		--pretty --strict < ${BUTANE_CONFIG} > ${IGNITION_CONFIG}
 	chcon --verbose --type svirt_home_t ${IGNITION_CONFIG}
 
+.PHONY: network-setup
+network-setup:
+	sudo virsh net-create --file=network.xml
+	sudo virsh net-start playground
 
 # Those knobs are currently undocumented but can played with if needed.
 VM_NAME ?= bootc-playground
+VM_NETWORK ?= virbr0
 VCPUS ?= 2
 RAM_MB ?= 4096
 DISK_GB ?= 10
@@ -61,7 +66,7 @@ vm-install:
 		--import \
 		--graphics=none \
 		--disk="size=${DISK_GB},backing_store=$(realpath ${IMAGE})" \
-		--network bridge=virbr0 \
+		--network bridge=${VM_NETWORK} \
 		${VM_MOUNT_ARGS} \
 		--qemu-commandline="-fw_cfg name=opt/com.coreos/config,file=${IGNITION_CONFIG}"
 
