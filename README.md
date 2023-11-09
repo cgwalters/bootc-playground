@@ -17,7 +17,7 @@ You may need to `chmod o+x $HOME` in order for `make vm-install` to succeed.
 ## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
 
 * `make download` to download a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) image.
-* `make vm-install` to install a VM with `virt-install`.  You may use the `IMAGE=/path/to/custom.qcow2` env variable to boot another local image.  If you face network issues, you may run `make network-setup` set `VM_NETWORK=virbrplayground` env variable.
+* `make vm-install` to install a VM with `virt-install`.  You may use the `IMAGE=/path/to/custom.qcow2` env variable to boot another local image.  If you face network issues, you may run `make network-setup` and set `VM_NETWORK=virbrplayground` env variable.
 * `make vm-{start,stop}` to start and stop the local VM.
 * `make vm-remove` to remove the local VM.
 * `make vm-ip` to inspect the IP address of the VM (e.g., to `ssh core@IP` into it).
