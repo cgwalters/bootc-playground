@@ -3,6 +3,16 @@
 This repository aims at facilitating playing with [bootc](https://containers.github.io/bootc/).
 [bootc](https://containers.github.io/bootc/) intersects with many technologies that we try to hide as much as possible such that you can focus on bootc and do not need to fight your way through the Fedora CoreOS or ignition documentation.
 
+## Prerequisites
+
+The workflow is based on a Makefile and works on Linux only.
+You need the following package prior to using the Makefile:
+
+```
+sudo dnf install git make coreos-installer qemu virt-install
+```
+
+You may need to `chmod o+x $HOME` in order for `make vm-install` to succeed.
 
 ## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
 

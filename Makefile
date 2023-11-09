@@ -49,7 +49,7 @@ endif
 vm-install:
 	@echo "Installing a new VM (${VM_NAME}) with image ${IMAGE}."
 	@echo "Set the VM_MOUNT environment variable to mount a host directory into the VM."
-	@echo "You may mount the host directory via 'sudo mount -t virtiofs vm-mount \$mountpoint'."
+	@echo "The VM_MOUNT gets automatically mounted to /var/playground."
 	@echo ""
 
 	sudo virt-install \
