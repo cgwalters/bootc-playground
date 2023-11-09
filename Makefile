@@ -33,6 +33,7 @@ ignition:
 	chcon --verbose --type svirt_home_t ${IGNITION_CONFIG}
 
 
+# Those knobs are currently undocumented but can played with if needed.
 VM_NAME ?= bootc-playground
 VCPUS ?= 2
 RAM_MB ?= 4096
@@ -83,10 +84,10 @@ vm-ip:
 
 .PHONY: vm-stop
 vm-stop:
-	@echo "Shutting down VM ${VM_NAME}."
+	@echo "Shutting down VM ${VM_NAME}.  May take a moment to take effect."
 	@echo ""
 
-	sudo virsh shutdown --domain ${VM_NAME} || true
+	sudo virsh shutdown --domain ${VM_NAME}
 
 
 .PHONY: vm-remove
