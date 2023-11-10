@@ -5,14 +5,22 @@ IMAGES_DIR:=./images
 # Download the latest stable Fedora CoreOS image.
 #
 # Source: https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/
-.PHONY: download
-download:
+.PHONY: download-fedora-coreos
+download-fedora-coreos:
 	mkdir --parents ${IMAGES_DIR}
 	coreos-installer download -s "${STREAM}" \
 		--platform qemu \
 		--format qcow2.xz \
 		--decompress \
 		--directory=${IMAGES_DIR}
+
+
+# Download the latest bootable Fedora cloud image.
+#
+# Source: https://github.com/CentOS/centos-boot-layered/tree/main/fedora-boot-cloud
+.PHONY: download-fedora-boot
+download-fedora-boot:
+	curl https://storage.googleapis.com/centos-boot-dev/fedora-boot-cloud.qcow2 -o ./images/fedora-boot-cloud.qcow2
 
 
 # virt-install requires most paths to be absolute, so try defaulting to
@@ -51,27 +59,52 @@ VM_MOUNT_ARGS=--filesystem=$(realpath ${VM_MOUNT}),playground-mount,driver.type=
 endif
 
 # Source: https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/#_booting_on_a_local_hypervisor_libvirt_example
-.PHONY: vm-install
-vm-install:
-	@echo "Installing a new VM (${VM_NAME}) with image ${IMAGE}."
+.PHONY: vm-install-ignition
+vm-install-ignition:
+	@echo "Installing a new VM (${VM_NAME}) with image ${IMAGE} **via ignition**."
 	@echo "Set the VM_MOUNT environment variable to mount a host directory into the VM."
 	@echo "The VM_MOUNT gets automatically mounted to /var/playground."
-	@echo "If the network step failed, run 'make network-setup' and set 'VM_NETWORK=virbrplayground`."
+	@echo "If the network step failed, run 'make network-setup' and set 'VM_NETWORK=virbrplayground'."
 	@echo ""
 
 	chcon --verbose --type svirt_home_t ${IGNITION_CONFIG}
 	sudo virt-install \
 		--connect="qemu:///system" \
 		--name="${VM_NAME}" \
+		--cpu=host \
 		--vcpus="${VCPUS}" \
 		--memory="${RAM_MB}" \
-		--os-variant="fedora-coreos-${STREAM}" \
+		--os-variant="detect=on,name=fedora-coreos-${STREAM}" \
 		--import \
 		--graphics=none \
 		--disk="size=${DISK_GB},backing_store=$(realpath ${IMAGE})" \
 		--network bridge=${VM_NETWORK} \
 		${VM_MOUNT_ARGS} \
 		--qemu-commandline="-fw_cfg name=opt/com.coreos/config,file=${IGNITION_CONFIG}"
+
+
+.PHONY: vm-install-cloud
+vm-install-cloud:
+	@echo "Installing a new VM (${VM_NAME}) with image ${IMAGE} **via clout-init**."
+	@echo "Set the VM_MOUNT environment variable to mount a host directory into the VM."
+	@echo "The VM_MOUNT gets automatically mounted to /var/playground."
+	@echo "If the network step failed, run 'make network-setup' and set 'VM_NETWORK=virbrplayground'."
+	@echo ""
+
+	chcon --verbose --type svirt_home_t ${IGNITION_CONFIG}
+	sudo virt-install \
+		--connect="qemu:///system" \
+		--name="${VM_NAME}" \
+		--cpu=host \
+		--vcpus="${VCPUS}" \
+		--memory="${RAM_MB}" \
+		--os-variant="detect=on,name=fedora-unknown" \
+		--import \
+		--graphics=none \
+		--disk="size=${DISK_GB},backing_store=$(realpath ${IMAGE})" \
+		--network bridge=${VM_NETWORK} \
+		${VM_MOUNT_ARGS} \
+		--cloud-init user-data=$(realpath ./cloud-init.yaml)
 
 
 # Some convenience targets to manage the VM.

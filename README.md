@@ -18,8 +18,8 @@ You may need to `chmod o+x $HOME` in order for `make vm-install` to succeed.
 
 ## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
 
-* `make download` to download a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) image.
-* `make vm-install` to install a VM with `virt-install`.  You may use the `IMAGE=/path/to/custom.qcow2` env variable to boot another local image.  If you face network issues, you may run `make network-setup` and set `VM_NETWORK=virbrplayground` env variable.
+* `make download-fedora-coreos` to download a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) image.
+* `make vm-install-ignition` to install a VM with `virt-install`.  You may use the `IMAGE=/path/to/custom.qcow2` env variable to boot another local image.  If you face network issues, you may run `make network-setup` and set `VM_NETWORK=virbrplayground` env variable.
 * `make vm-{start,stop}` to start and stop the local VM.
 * `make vm-remove` to remove the local VM.
 * `make vm-ip` to inspect the IP address of the VM (e.g., to `ssh core@IP` into it).
@@ -41,7 +41,7 @@ If you want to try out a development version of bootc or test a pull request, yo
 The local Git tree can then be mounted into the VM and the host's `bootc` can be executed directly.
 
 
-## Rebase Fedora CoreOS Image
+### Rebase Fedora CoreOS Image
 
 Once your VM has booted, you may rebase your image as described in the [CentOS boot documentation](https://github.com/CentOS/centos-boot/blob/main/docs/install.md).
 That will rebase your VM into a bootable image with [bootc](https://containers.github.io/bootc/) installed.
