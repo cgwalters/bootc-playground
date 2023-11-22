@@ -14,3 +14,6 @@ users:
     groups: [wheel]
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
+
+runcmd:
+- sh -c "mkdir -p /var/playground; /usr/bin/mount -t virtiofs playground-mount /var/playground || true"
