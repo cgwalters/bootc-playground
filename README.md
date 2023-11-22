@@ -20,6 +20,8 @@ You may need to `chmod o+x $HOME` in order for `make vm-install` to succeed.
 
 ## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
 
+You may also start off an ostree-enabled system, such as Fedora CoreOS.  Once installed, you can rebase the system to a bootable container and go from there.  To do that, follow the instructions below:
+
 * `make download-fedora-coreos` to download a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) image.
 * `make vm-install-ignition` to install a VM with `virt-install`.  You may use the `IMAGE=/path/to/custom.qcow2` env variable to boot another local image.  If you face network issues, you may run `make network-setup` and set `VM_NETWORK=virbrplayground` env variable.
 * `make vm-{start,stop}` to start and stop the local VM.
