@@ -91,7 +91,6 @@ vm-install-cloud:
 	@echo "If the network step failed, run 'make network-setup' and set 'VM_NETWORK=virbrplayground'."
 	@echo ""
 
-	chcon --verbose --type svirt_home_t ${IGNITION_CONFIG}
 	sudo virt-install \
 		--connect="qemu:///system" \
 		--name="${VM_NAME}" \
