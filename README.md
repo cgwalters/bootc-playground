@@ -5,6 +5,7 @@ This repository aims at facilitating playing with [bootc](https://containers.git
 
 If you find issues, please let me know or open a PR.  I am used to managing containers not VMs :^)
 
+
 ## Prerequisites
 
 The workflow is based on a Makefile and works on Linux only.
@@ -15,6 +16,7 @@ sudo dnf install git make coreos-installer qemu virt-install
 ```
 
 You may need to `chmod o+x $HOME` in order for `make vm-install` to succeed.
+
 
 ## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
 
@@ -30,17 +32,6 @@ If you desire changing the ignition config (i.e., `ignition.ign`), please update
 You can then git-commit the changes.
 
 
-### Mount Host Directories
-
-If you want to mount a host directory into the VM, set the `VM_MOUNT` environment variable and run `make vm-install`.
-The variable will instruct `virt-install` to setup a [virtiofs mount](https://libvirt.org/kbase/virtiofs.html) with the `playground-mount` tag.
-The specified `VM_MOUNT` is automatically mounted at `/var/playground`.
-You may mount it to a custom path via `$ sudo mount -t virtiofs playground-mount /custom/path`.
-
-If you want to try out a development version of bootc or test a pull request, you may point `VM_MOUNT` to your local [bootc](https://github.com/containers/bootc) Git tree.
-The local Git tree can then be mounted into the VM and the host's `bootc` can be executed directly.
-
-
 ### Rebase Fedora CoreOS Image
 
 Once your VM has booted, you may rebase your image as described in the [CentOS boot documentation](https://github.com/CentOS/centos-boot/blob/main/docs/install.md).
@@ -51,6 +42,17 @@ However, https://github.com/containers/bootc/pull/137 needs to be addressed befo
 The instructions will be updated here once things run smoothly.
 
 Note that `bootc-install-alongside` already works on non os-tree hosts.
+
+
+## Mount Host Directories
+
+If you want to mount a host directory into the VM, set the `VM_MOUNT` environment variable and run `make vm-install-*`.
+The variable will instruct `virt-install` to setup a [virtiofs mount](https://libvirt.org/kbase/virtiofs.html) with the `playground-mount` tag.
+The specified `VM_MOUNT` is automatically mounted at `/var/playground`.
+You may mount it to a custom path via `$ sudo mount -t virtiofs playground-mount /custom/path`.
+
+If you want to try out a development version of bootc or test a pull request, you may point `VM_MOUNT` to your local [bootc](https://github.com/containers/bootc) Git tree.
+The local Git tree can then be mounted into the VM and the host's `bootc` can be executed directly.
 
 
 ## Bootable Disk Images
