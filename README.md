@@ -1,10 +1,8 @@
 # Playground for [bootc](https://containers.github.io/bootc/)
 
-This repository aims at facilitating playing with [bootc](https://containers.github.io/bootc/).
-[bootc](https://containers.github.io/bootc/) intersects with many technologies that we try to hide as much as possible such that you can focus on bootc and do not need to fight your way through the Fedora CoreOS or ignition documentation.
-
-If you find issues, please let me know or open a PR.  I am used to managing containers not VMs :^)
-
+The playground attempts to facilitate booting into a [bootc](https://containers.github.io/bootc/)-enabled VM.
+You may boot into a Fedora Core OS VM or a Fedora Cloud image.
+The Makefile tries to hide the details of downloading, running and provisioning the VMs which can consume a considerable amount of time.
 
 ## Prerequisites
 
