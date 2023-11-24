@@ -29,6 +29,16 @@ The VM is provisioned via cloud init.  Note that you need to SSH into the machin
 The default user is `core` with the password `core`.  Once you have the VM installed and running, you are ready to play with bootc.
 
 
+## Mount Host Directories
+
+If you want to mount a host directory into the VM, set the `VM_MOUNT` environment variable and run `make vm-install-*`.
+The variable will instruct `virt-install` to setup a [virtiofs mount](https://libvirt.org/kbase/virtiofs.html) with the `playground-mount` tag.
+The specified `VM_MOUNT` is automatically mounted at `/var/playground`.
+You may mount it to a custom path via `$ sudo mount -t virtiofs playground-mount /custom/path`.
+
+If you want to try out a development version of bootc or test a pull request, you may point `VM_MOUNT` to your local [bootc](https://github.com/containers/bootc) Git tree.
+The local Git tree can then be mounted into the VM and the host's `bootc` can be executed directly.
+
 ## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
 
 You may also start off an ostree-enabled system, such as Fedora CoreOS.  Once installed, you can rebase the system to a bootable container and go from there.  To do that, follow the instructions below:
@@ -47,21 +57,3 @@ However, https://github.com/containers/bootc/pull/137 needs to be addressed befo
 The instructions will be updated here once things run smoothly.
 
 Note that `bootc-install-alongside` already works on non os-tree hosts.
-
-
-## Mount Host Directories
-
-If you want to mount a host directory into the VM, set the `VM_MOUNT` environment variable and run `make vm-install-*`.
-The variable will instruct `virt-install` to setup a [virtiofs mount](https://libvirt.org/kbase/virtiofs.html) with the `playground-mount` tag.
-The specified `VM_MOUNT` is automatically mounted at `/var/playground`.
-You may mount it to a custom path via `$ sudo mount -t virtiofs playground-mount /custom/path`.
-
-If you want to try out a development version of bootc or test a pull request, you may point `VM_MOUNT` to your local [bootc](https://github.com/containers/bootc) Git tree.
-The local Git tree can then be mounted into the VM and the host's `bootc` can be executed directly.
-
-
-## Bootable Disk Images
-
-It would be great to directly create a VM with a "bootable" disk image instead of doing the dance of first installing Fedora CoreOS and immediately rebasing or overriding it afterwards.
-There are some images floating around but a more streamlined effort is currently taking place in the [CentOS boot project](https://github.com/CentOS/centos-boot/blob/main/docs/install.md#todo-use-osbuild).
-Once images from the pipeline are available, the documentation here and the Makefile will be updated.
