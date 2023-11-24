@@ -10,10 +10,11 @@ users:
   - name: core
     passwd: "$6$zrU01HvYninjs3f3$7j0zy9AxFBjBisIlxXO77YKqmqn9qPoc1vKbvctqWVA/gHgb5fQVCDkmQEJNBI9p4UfSTKrcLyPQl.BzLRbrp0"
     lock_passwd: false
-    ssh_pwauth: True
     groups: [wheel]
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
+
+ssh_pwauth: True
 
 runcmd:
 - sh -c "mkdir -p /var/playground; /usr/bin/mount -t virtiofs playground-mount /var/playground || true"
