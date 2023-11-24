@@ -1,4 +1,4 @@
-# Playground for [bootc](https://containers.github.io/bootc/)
+# Playground for bootc
 
 The playground attempts to facilitate booting into a [bootc](https://containers.github.io/bootc/)-enabled VM.
 You may boot into a Fedora Core OS VM or a Fedora Cloud image.
@@ -16,7 +16,7 @@ sudo dnf install git make coreos-installer qemu virt-install
 You may need to `chmod o+x $HOME` in order for `make vm-install` to succeed.
 
 
-## Install a [bootc-enabled Fedora Cloud](https://github.com/CentOS/centos-bootc-layered/tree/main/fedora-bootc-cloud) VM
+## Install a bootc-enabled Fedora CloudVM
 
 The VM is provisioned via cloud init.  Note that you need to SSH into the machine since you will not (yet) get access to the console on install.
 
@@ -39,7 +39,8 @@ You may mount it to a custom path via `$ sudo mount -t virtiofs playground-mount
 If you want to try out a development version of bootc or test a pull request, you may point `VM_MOUNT` to your local [bootc](https://github.com/containers/bootc) Git tree.
 The local Git tree can then be mounted into the VM and the host's `bootc` can be executed directly.
 
-## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
+
+## Install a Fedora CoreOS VM
 
 You may also start off an ostree-enabled system, such as Fedora CoreOS.  Once installed, you can rebase the system to a bootable container and go from there.  To do that, follow the instructions below:
 
