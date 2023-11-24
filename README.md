@@ -16,20 +16,25 @@ sudo dnf install git make coreos-installer qemu virt-install
 You may need to `chmod o+x $HOME` in order for `make vm-install` to succeed.
 
 
-## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
+## Install a [bootc-enabled Fedora Cloud](https://github.com/CentOS/centos-bootc-layered/tree/main/fedora-bootc-cloud) VM
 
-You may also start off an ostree-enabled system, such as Fedora CoreOS.  Once installed, you can rebase the system to a bootable container and go from there.  To do that, follow the instructions below:
+The VM is provisioned via cloud init.  Note that you need to SSH into the machine since you will not (yet) get access to the console on install.
 
-* `make download-fedora-coreos` to download a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) image.
-* `make vm-install-ignition` to install a VM with `virt-install`.  You may use the `IMAGE=/path/to/custom.qcow2` env variable to boot another local image.  If you face network issues, you may run `make network-setup` and set `VM_NETWORK=virbrplayground` env variable.
+* `make download-fedora-cloud` to download a [bootc-enabled Fedora Cloud](https://github.com/CentOS/centos-bootc-layered/tree/main/fedora-bootc-cloud) image.
+* `make vm-install-cloud` to install a VM with `virt-install`.  You may use the `IMAGE=/path/to/custom.qcow2` env variable to boot another local image.  If you face network issues, you may run `make network-setup` and set `VM_NETWORK=virbrplayground` env variable.
 * `make vm-{start,stop}` to start and stop the local VM.
 * `make vm-remove` to remove the local VM.
 * `make vm-ip` to inspect the IP address of the VM (e.g., to `ssh core@IP` into it).
 
 The default user is `core` with the password `core`.  Once you have the VM installed and running, you are ready to play with bootc.
 
-If you desire changing the ignition config (i.e., `ignition.ign`), please update the [Butane config](https://coreos.github.io/butane/specs/) (i.e., `butane.bu`) first and then run `make ignition`.
-You can then git-commit the changes.
+
+## Install a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) VM
+
+You may also start off an ostree-enabled system, such as Fedora CoreOS.  Once installed, you can rebase the system to a bootable container and go from there.  To do that, follow the instructions below:
+
+* `make download-fedora-coreos` to download a [Fedora CoreOS](https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/) image.
+* `make vm-install-ignition` to install a VM with `virt-install`.  The remaining commands are just as the ones explained above.
 
 
 ### Rebase Fedora CoreOS Image

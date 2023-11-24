@@ -18,8 +18,8 @@ download-fedora-coreos:
 # Download the latest bootable Fedora cloud image.
 #
 # Source: https://github.com/CentOS/centos-boot-layered/tree/main/fedora-boot-cloud
-.PHONY: download-fedora-boot
-download-fedora-boot:
+.PHONY: download-fedora-cloud
+download-fedora-cloud:
 	curl https://storage.googleapis.com/centos-boot-dev/fedora-boot-cloud.qcow2 -o ./images/fedora-boot-cloud.qcow2
 
 
